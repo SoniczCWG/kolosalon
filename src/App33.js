@@ -1,4 +1,4 @@
-import { useRef,useState,useReducer,useEffect   }from 'react';
+import { useRef,useState,useReducer   }from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {objs} from "./objekty.js"
@@ -33,14 +33,6 @@ function App() {
   
   const [objednavka, dispatch] = useReducer(setObjednavka, defaultObjednavka);    
   
-  useEffect(() => {
-    // let newFinalPrice = getFinalPrice(objednavka);
-    // setShowFinalPrice(newFinalPrice);
-    // let newGiftCheck = checkGift(showFinalPrice);
-    let newFinalPrice = checkPrice(objednavka,false);
-    setShowFinalPrice(newFinalPrice);
-  }, [objednavka, showFinalPrice]);
-
   function checkPrice(objednavka, render)  {
     let init_price=0
     if (objednavka.input_checkbox_0 == true) {
@@ -52,16 +44,12 @@ function App() {
     if (objednavka.input_checkbox_4 == true) {
       init_price += (500*objednavka.input_number_5)
     }
-    init_price=(init_price*objednavka.select_0*objednavka.radioGroup_0)
+    init_price=(init_price*objednavka.select_0)+(init_price*objednavka.radioGroup_0)
     if (render == true){
       setFinalPrice(init_price)
       setShowFinalPrice(init_price)
       document.querySelector("#finalniCena").value = init_price }
-    console.log(init_price+"<last love>"+objednavka.zadanasuma)
-    if (init_price > objednavka.zadanasuma) {set_vysledek_zustatku_num("Nemáš dost peněz");
-  objednavka['suma_dostacujici']="Nemáš dost peněz"} 
-    else if (init_price < objednavka.zadanasuma) { set_vysledek_zustatku_num("Máš dost peněz") }
-    return(init_price)
+    console.log(init_price)
     // return init_price
   }
   
@@ -69,10 +57,10 @@ function App() {
   function check_money(objednavka=objednavka) {
     checkPrice(objednavka,false)
     let zadanasuma = document.querySelector('#zadanasumaid').value
-    console.log(checkPrice(objednavka,true),zadanasuma)
-    if (checkPrice(objednavka,true) > zadanasuma) {set_vysledek_zustatku_num("Nemáš dost peněz");
+    console.log(finalPrice,zadanasuma)
+    if (finalPrice > zadanasuma) {set_vysledek_zustatku_num("Nemáš dost peněz");
   objednavka['suma_dostacujici']="Nemáš dost peněz"} 
-    else if (checkPrice(objednavka,true) < zadanasuma) { set_vysledek_zustatku_num("Máš dost peněz") }
+    else if (finalPrice < zadanasuma) { set_vysledek_zustatku_num("Máš dost peněz") }
     else {set_vysledek_zustatku_num("Nic ne nestalo")}
     // zadanasuma.innerHTML=
   }
@@ -93,15 +81,13 @@ const select_form = (name="",id="",descs=[],onchange=()=>{}) => {
       key: "select_0",
     }); console.log(e.target.value);}}>{descs.map(descs => <option value={descs.value}>{descs.desc}</option>)}</select>)};
 
-
   return (
     <>
-    <img src='Wooden-Explorer-natural-27.5.jpg'></img> #někde jsem to už používal ale jdu dom
-<div class="cokolik">
+
 <input type="checkbox" id="input_checkbox_0" onChange={(e) => {
               dispatch({
                 type: "toggle_input_checkbox_0",
-              }); 
+              });
             }} />
 
 {input_form("number", "input_number_1" ,objednavka.input_number_1, (e) => {      
@@ -109,12 +95,12 @@ const select_form = (name="",id="",descs=[],onchange=()=>{}) => {
               type: "update_number",
               value: e.target.value,
               key: "input_number_1",
-            });console.log(e.target.value); })} HORSKE - toto je horske kolo | cena: 100 <br />
+            });console.log(e.target.value);})} HORSKE - toto je horske kolo | cena: 100 <br />
 
 <input type="checkbox" id="input_checkbox_2" onChange={(e) => {
               dispatch({
                 type: "toggle_input_checkbox_2",
-              }); 
+              });
             }} />
 
 {input_form("number", "input_number_3" ,objednavka.input_number_3, (e) => {      
@@ -122,12 +108,12 @@ const select_form = (name="",id="",descs=[],onchange=()=>{}) => {
               type: "update_number",
               value: e.target.value,
               key: "input_number_3",
-            });console.log(e.target.value); })} detske - toto je detske kolo | cena: 50<br />
+            });console.log(e.target.value);})} detske - toto je detske kolo | cena: 50<br />
 
 <input type="checkbox" id="input_checkbox_4" onChange={(e) => {
               dispatch({
                 type: "toggle_input_checkbox_4",
-              }); 
+              });
             }} />
 
 {input_form("number", "input_number_5" ,objednavka.input_number_5, (e) => {      
@@ -135,10 +121,8 @@ const select_form = (name="",id="",descs=[],onchange=()=>{}) => {
               type: "update_number",
               value: e.target.value,
               key: "input_number_5",
-            });console.log(e.target.value); })} silnička - toto je kolo pro frajery (nepraktické) | cena: 500<br />
-</div>
+            });console.log(e.target.value);})} silnička - toto je kolo pro frajery (nepraktické) | cena: 500<br />
 
-<div class="cokolik">
 {select_form("select1","abc",[{desc:"5 Dnů",value:5},{desc:"Týden",value:7},
 {desc:"14 Dnů",value:14},{desc:"Měsíc",value:31}])}
 
@@ -147,24 +131,24 @@ const select_form = (name="",id="",descs=[],onchange=()=>{}) => {
               type: "update_number",
               value: e.target.value,
               key: "radioGroup_0",
-            });console.log(e.target.value); },1.05)} Střešní nosič +5% |  
+            });console.log(e.target.value);},1.05)} Střešní nosič +5% |  
 
 {input_form("radio", "radioGroup_0" ,objednavka.radioGroup_0, (e) => {
             dispatch({
               type: "update_number",
               value: e.target.value,
               key: "radioGroup_0",
-            });console.log(e.target.value); },1.1)} Nosič na sněžný skůtr +10% |
+            });console.log(e.target.value);},1.1)} Nosič na sněžný skůtr +10% |
 
 {input_form("radio", "radioGroup_0" ,objednavka.radioGroup_0, (e) => {
             dispatch({
               type: "update_number",
               value: e.target.value,
               key: "radioGroup_0",
-            });console.log(e.target.value); },1)} Žádné přislušenství <br />
-</div>
+            });console.log(e.target.value);},1)} Žádné přislušenství <br />
 
-<div class="cokolik">
+
+
 Máš keš ? Zadej částku:  
 {input_form("number", "zadanasuma" ,"zadanasumaid", (e) => {
             dispatch({
@@ -174,15 +158,12 @@ Máš keš ? Zadej částku:
             });console.log(e.target.value);})}<br />
 
 <button onClick={check_money}>Zjistit!</button> <input type="text" id="zustatek" placeholder={vysledek_zustatku_num} disabled/> <p id='#vypiszustatku'></p> <br></br><br></br>
-</div>
-
-<div class="cokolik">
 
 <label>Finální cena:</label>
           <input type="text" id="finalniCena" value={showFinalPrice} disabled />
           <button onClick={() => {
             checkPrice(objednavka,true);
-            console.log(finalPrice); 
+            console.log(finalPrice);
           }}>
             Vypočti
           </button>
@@ -194,7 +175,7 @@ Máš keš ? Zadej částku:
             <p>K objednávce Vám přibalíme malý dárek.</p>
           </GiftAlert> */}
 
-      {/* <button> Vypočti </button> */}</div>
+      {/* <button> Vypočti </button> */}
     </>
   );
 }
