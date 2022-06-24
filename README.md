@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Je tu navíc soubor 'p.py' v src, který generuje "react" kód i s instrukcema na použití podle objektu/slovníku "must_format". Příšerný špagety kód co jsem včera zprasil, chce ještě práci, možná své vlastní repo v budoucnosti. 
 
 ## Available Scripts
 
