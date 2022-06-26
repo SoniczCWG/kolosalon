@@ -13,6 +13,24 @@
   }
 }
 
+#headerLogoWrap {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+#headerlogo img {
+  max-height: 11vh;
+}
+
+#headerlogo img:nth-child(2) {
+  padding-bottom: 1vh;
+}
+
+#content {
+  margin: auto auto;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -37,21 +55,233 @@
   }
 }
 
+input {
+  color: white !important;
+  background-color:rgba(53, 126, 79, 0.877) ;
+}
+
 body {
   width: 100vw;
   height: 100vh;
   display: block;
   justify-content: center;
   margin: 0 auto;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(4,53,0,1) 0%, rgba(0,0,0,1) 50%, rgba(4,53,0,1) 100%);
+  color: white !important;
+}
+
+select {
+  margin-left: 7px;
 }
 
 .cokolik {
-  border: 1px solid #661df8;
-  background-color: khaki;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #39ff7fe3;
+  background-color: #00ff4425;
   width: 80vw;
   align-content: center;
   justify-content: center;
   margin-bottom: 11px;
   margin-left: 10vw;
+  padding-top: 7px;
+  padding-bottom: 9px;
+  border-radius: 5px;
 }
+
+
+
+.cokolik:nth-child(3) {
+  padding-top: 24px;
+}
+
+.imgbike {
+  max-height: 15vh;
+  display: block;
+  margin-bottom: 3vh;
+  margin-top: 3vh;
+}
+
+.card {
+  /* border: 1px solid #39ff7fe3; */
+  margin: 0 2vw;
+  padding: -10px -50px;
+  background-color: #00ff4425;
+  text-align: center;
+  border-radius: 11px;
+  display: flex;
+  width: 20vw;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p, button, input {
+  margin-left: 6px;
+  margin-right: 6px;
+  border-radius: 7px;
+}
+
+button {
+  height: 2rem;
+  margin: auto 7px;
+}
+
+#zadanasumaid, #zustatek, #finalniCena {
+  margin: auto 0px;
+  height: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+
+  #headerLogoWrap {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #headerlogo img {
+    max-height: 11vh;
+  }
+  
+  #headerlogo img:nth-child(2) {
+    padding-bottom: 1vh;
+  }
+  
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  input {
+    color: white !important;
+  }
+  
+  body {
+    width: 100vw;
+    height: 100vh;
+    display: inline;
+    /* justify-content: center;
+    margin: 0 auto; */
+    overflow: auto;
+    background: linear-gradient(90deg, rgba(4,53,0,1) 0%, rgba(0,0,0,1) 50%, rgba(4,53,0,1) 100%);
+    color: white !important;
+  }
+  
+  select {
+    margin-left: 7px;
+  }
+  
+  .cokolik {
+
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #39ff7fe3;
+    background-color: #00ff4446;
+    width: 80vw;
+    padding-top: 7px;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    /* margin-bottom: 11px;
+    margin-left: 10vw;
+    padding-bottom: 9px;
+    border-radius: 5px; */
+  }
+
+  .cokolik * , .cokolik input {
+    max-width: 50vw;
+    margin: 1vh auto;
+    /* margin-bottom: 11px;
+    margin-left: 10vw;
+    padding-bottom: 9px;
+    border-radius: 5px; */
+  }
+  
+  .cokolik select {
+    max-width: 70vw;
+    margin: 0 auto;
+    /* transform: translateX(-50vw); */
+  }
+  
+  .cokolik:nth-child(3) {
+    padding-top: 24px;
+  }
+  
+  .imgbike {
+    max-height: 15vh;
+    display: block;
+    margin-bottom: 3vh;
+    margin-top: 3vh;
+  }
+  
+  .card {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    border-radius: 11px;
+    display: flex;
+    width: 70vw; 
+    margin: 5px auto;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+  }
+
+
+
+  .card input {
+    max-width:70vw;
+    display: block;
+    /* margin-top: 2vh;
+    margin-bottom: 2vh; */
+  }
+  
+  p, button, input {
+    /* margin: 5px calc(auto+5px) !important; */
+    /* display: flex;
+    justify-content: center; */
+    /* margin-left: 6px;
+    margin-right: 6px; */
+    border-radius: 7px;
+    max-width: 50vw;
+  }
+  
+  button {
+    height: 2rem;
+    margin: auto 7px;
+  }
+  
+  #zadanasumaid, #zustatek, #finalniCena {
+    margin: auto 0px;
+    height: 1rem;
+    display: flex;
+width: 80vw;
+margin: 0 auto;
+  }
+  }
+
+
+
 
